@@ -11,6 +11,13 @@ class AppTheme {
     fontWeight: FontWeight.bold,
   );
 
+  static TextStyle SECONDARY_TITLE_STYLE = const TextStyle(
+    fontFamily: 'font',
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
   static TextStyle SEGMENTED_STYLE_ACTIVE = const TextStyle(
     fontFamily: 'font',
     color: Colors.black,

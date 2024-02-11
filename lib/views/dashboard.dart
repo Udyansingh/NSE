@@ -12,11 +12,13 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   late final RxString selectedInstrument = 'NIFTY'.obs; // Use RxString
+  late final RxDouble strikePrice = 0.0.obs; // Use RxString
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppTheme.BACKGROUND_COLOR,
       appBar: AppBar(
         backgroundColor: AppTheme.BACKGROUND_COLOR,
@@ -33,15 +35,15 @@ class _DashBoardState extends State<DashBoard> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: size.width * 0.1,
-            ),
-            child: FittedBox(
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.1,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FittedBox(
               child: Obx(
                 () => CupertinoSlidingSegmentedControl(
                   groupValue: selectedInstrument.value,
@@ -72,15 +74,54 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-          ),
-          Slider(
-            value: 0.0,
-            min: 0.0,
-            max: 100.0,
-            onChanged: (double value) {},
-            label: 'Strike Price',
-          )
-        ],
+            Text(
+              'Strike Price',
+              textAlign: TextAlign.center,
+              style: AppTheme.SECONDARY_TITLE_STYLE,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.add_box_rounded,
+                    color: AppTheme.COLOR_LIGHT,
+                    size: 36,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.2,
+                  height: 30,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: '19500',
+                      hintStyle: AppTheme.SEGMENTED_STYLE_ACTIVE,
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        left: size.width * 0.05,
+                        bottom: 12,
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.indeterminate_check_box_rounded,
+                    color: AppTheme.COLOR_LIGHT,
+                    size: 36,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
